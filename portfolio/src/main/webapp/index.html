@@ -4,60 +4,106 @@
 <head>
 	<meta charset="UTF-8">
 	<title>My Portfolio</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
- 
 	<link rel="stylesheet" href="style.css">
+
 	<script src="script.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 </head>
 
 <body>
+	<!--Navigation bar-->
+	<div id="nav-placeholder">
+	</div>
+	<script>
+		$(function(){
+  $("#nav-placeholder").load("nav.html");
+});
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
-		<h1 class="text-white">Eugene Teu </h1>
-	</nav>
-       <div id="like_button_container"></div>
+	</script>
+	<!--end of Navigation bar-->
 	<div id="content">
-
-		<div class="card mt-5">
-			<div class="card-header">
+		<div id="Home" class="tabcontent">
+			<h1 class="m-title">Eugene Teu</h1>
+			<h2>Software Engineering. Computer Science.</h2>
+		</div>
+		<!-- Tab content -->
+		<div id="About" class="tabcontent">
+			<div>
 				<h2>About Me</h2>
-			</div>
-			<div class='card-body'>
-				<img src="../images/dsc_pic.jpg" alt="Avatar" style="width:100%">
-				
-			</div>
-            <div class="card-footer"><h6>
-					Computer Science Undergraduate
-				</h6>
-				<p> I specialize in Full Stack Software Development. Passionate
-					about all things Tech. Currently pursuing my Computer Science Degree @
-					National University Of Singapore. <br />
+				<div style="display:flex;flexdirection:row;">
+
+					<img src="../images/dsc_pic.jpg" alt="Avatar" style="margin:auto;width:80%">
+                </div>
+
+					<div>
+
+						<h2>
+							Computer Science Undergraduate
+						</h2>
+						<p> I specialize in Full Stack Software Development. Passionate
+							about all things Tech. Currently pursuing my Computer Science Degree @
+							National University Of Singapore. <br />
                     My focus area of study includes Software Engineering,
                     Programming languages and Database Management. I aspire to
                     use my knowledge and skills to build things that will
-                    leave an impact on society in the future.</p></div>
-		</div>
-        <div class="mt-5">
-		<p>Click here to get a random message:</p>
-		<button onclick="addRandomGreeting()">Hello</button>
-		<div id="greeting-container"></div>
-        </div>
-	</div>
-    <!-- loading react component (testing)
-            <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script src="like_button.js"></script> !-->
+                    leave an impact on society in the future.</p>
+					</div>
+				</div>
+			</div>
 
+			<div id="Skills" class="tabcontent">
+
+				<div>
+					<h2>Skills</h2>
+				</div>
+			</div>
+
+			<div id="Experience" class="tabcontent">
+
+				<div>
+					<h2>Experience</h2>
+					<div class="job">
+						<div class="job-item">
+
+							<dl class="job-item">
+								<dt>Shopee Singapore</dt>
+								<dd>
+									 <p>Software Engineering Intern</p>
+                                     <p>May 2020- Aug 2020</p>
+								</dd>
+
+							</dl>
+							<dl class="job-item">
+
+								<dt class="job-item">PsLove Pte Ltd</dt>
+								<dd>  <p>Software Engineering Intern</p>
+                                <p>Dec 2019- April 2020</p>
+								</dd>
+							</dl>
+                            							<dl class="job-item">
+
+								<dt class="job-item">Webpuppies Pte Ltd</dt>
+								<dd>  <p>Web developer Intern</p>
+                                <p>May 2019- Aug 2019</p>
+								</dd>
+							</dl>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div id="Projects" class="tabcontent">
+
+				<div id="skills">
+					<h2>Projects</h2>
+				</div>
+			</div>
 </body>
 
 </html>

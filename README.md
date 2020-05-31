@@ -2,6 +2,9 @@
 
 This repo contains Eugene Teu portfolio and SPS projects.
 
+![Alt text](/portfolio/src/main/webapp/images/cover-page?raw=true "Portfolio")
+
+
 To get started:
 
 - Login to [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell/editor)
