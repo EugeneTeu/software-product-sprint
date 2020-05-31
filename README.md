@@ -2,7 +2,7 @@
 
 This repo contains Eugene Teu portfolio and SPS projects.
 
-![Alt text](/portfolio/src/main/webapp/images/cover-page?raw=true "Portfolio")
+![Portfolio](/portfolio/src/main/webapp/images/cover-page.png?raw=true "Portfolio")
 
 
 To get started:
