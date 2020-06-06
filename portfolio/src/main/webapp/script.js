@@ -29,6 +29,8 @@ function openSection(evt, sectionName) {
     tabLinks[i].className = tabLinks[i].className.replace(" active", "");
   }
 
-  document.getElementById(sectionName).style.display = "block";
-  evt.currentTarget.className += " active";
+  if (document.getElementById(sectionName) !== null) {
+     document.getElementById(sectionName).style.display = "block";
+       evt.currentTarget.className += " active";
+  }
 }
