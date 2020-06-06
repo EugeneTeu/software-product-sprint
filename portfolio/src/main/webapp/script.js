@@ -12,23 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/*
+* Finds the tab that has been selected and display that tab
+*
+* @params { object } evt: HTML event
+* @params { sectionName } string: section Nam 
+*/
 function openSection(evt, sectionName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
+  
+  const tabContents = document.getElementsByClassName("tab-content");
+  for (let i = 0; i < tabContents.length; i++) {
+    tabContents[i].style.display = "none";
+  }
+  
+  const tabLinks = document.getElementsByClassName("tab-links");
+  for (let i = 0; i < tabLinks.length; i++) {
+    tabLinks[i].className = tabLinks[i].className.replace(" active", "");
   }
 
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(sectionName).style.display = "block";
   evt.currentTarget.className += " active";
 }
