@@ -226,7 +226,6 @@ p {
 }
 
 /* large screens */
-
 @media only screen and (min-width: 992px) {
   .navbar {
     top: 0;
