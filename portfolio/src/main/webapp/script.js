@@ -16,21 +16,21 @@
 * Finds the tab that has been selected and display that tab
 *
 * @params { object } evt: HTML event
-* @params { sectionName } string: section Nam 
+* @params { sectionName } string: section Name
 */
 function openSection(evt, sectionName) {
-  const tabContents = document.getElementsByClassName("tab-content");
-  for (let i = 0; i < tabContents.length; i++) {
-    tabContents[i].style.display = "none";
-  }
+    const tabContents = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
 
-  const tabLinks = document.getElementsByClassName("tab-links");
-  for (let i = 0; i < tabLinks.length; i++) {
-    tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-  }
+    const tabLinks = document.getElementsByClassName("tab-links");
+    for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
 
-  if (document.getElementById(sectionName) !== null) {
-     document.getElementById(sectionName).style.display = "block";
-       evt.currentTarget.className += " active";
-  }
+    if (document.getElementById(sectionName) !== null) {
+        document.getElementById(sectionName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 }
