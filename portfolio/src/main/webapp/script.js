@@ -36,8 +36,8 @@ function openSection(evt, sectionName) {
 }
 
 /*
-* Fetch message from server then displays it
-*/
+ * Fetch message from server then displays it
+ */
 async function getMessage() {
   const response = await fetch('/data');
   const message = await response.text();
