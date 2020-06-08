@@ -36,13 +36,27 @@ function openSection(evt, sectionName) {
 }
 
 /*
- * Fetch message from server then displays it
+ * Takes in a string and creates a list element
+ *
+ * @params { text } text: string
  */
-async function fetchAndUpdateMessage() {
+const createListElement = (text) => {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+/*
+ * Fetch comments from server then adds it to the dom
+ */
+async function fetchAndUpdateComments() {
   const response = await fetch('/data');
-  const message = await response.text();
-  const messageContainer = document.getElementById('message-container');
-  if (messageContainer !== null) {
-    messageContainer.innerText = message;
+  const comments = await response.json();
+  const commentsContainer = document.getElementById('comments-container');
+  if (commentsContainer !== null) {
+    commentsContainer.innerHTML = '';
+    if (comments && comments.length !== 0) {
+      comments.map((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment}`)));
+    }
   }
 }
