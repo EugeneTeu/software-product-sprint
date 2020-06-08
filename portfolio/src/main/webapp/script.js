@@ -43,6 +43,6 @@ async function fetchAndUpdateMessage() {
   const message = await response.text();
   const messageContainer = document.getElementById('message-container');
   if (messageContainer !== null) {
-    document.getElementById('message-container').innerText = message;
+    messageContainer.innerText = message;
   }
 }
