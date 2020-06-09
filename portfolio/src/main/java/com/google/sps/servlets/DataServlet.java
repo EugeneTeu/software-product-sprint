@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Return welcome message in a text/html. */
+/** Servlet that returns welcome message.*/
 @WebServlet("/welcome_message")
 public class DataServlet extends HttpServlet {
 
