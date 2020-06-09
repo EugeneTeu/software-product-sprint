@@ -38,10 +38,10 @@ function openSection(evt, sectionName) {
 /*
  * Fetch message from server then displays it
  */
-async function fetchAndUpdateMessage() {
-  const response = await fetch('/data');
+async function fetchAndUpdateWelcomeMessage() {
+  const response = await fetch('/welcome_message');
   const message = await response.text();
-  const messageContainer = document.getElementById('message-container');
+  const messageContainer = document.getElementById('welcome-message-container');
   if (messageContainer !== null) {
     messageContainer.innerText = message;
   }
