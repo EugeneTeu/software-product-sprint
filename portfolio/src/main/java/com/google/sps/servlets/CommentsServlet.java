@@ -22,21 +22,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns a welcome message.*/
-@WebServlet("/welcome_message")
-public class DataServlet extends HttpServlet {
+/** Servlet that returns a list of comment.*/
+@WebServlet("/comments")
+public class CommentsServlet extends HttpServlet {
 
-  private ArrayList<String> messages;
+  private ArrayList<String> comments;
 
   /**
-   * Initalise list of messages and add values to it.
+   * Initalise list of comments and add values to it.
    */
   @Override 
   public void init() {
-    messages = new ArrayList<String>();
-    messages.add("Hello nice to meet you!");
-    messages.add("It is a beautiful sunny day!");
-    messages.add("The sky is very bright today!");
+    comments = new ArrayList<String>();
+    comments.add("Hello nice to meet you!");
+    comments.add("It is a beautiful sunny day!");
+    comments.add("The sky is very bright today!");
   }
 
   /**
@@ -50,10 +50,10 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJsonUsingGson(messages);
+    String commentsJson = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
     response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.getWriter().println(commentsJson);
   }
 }
