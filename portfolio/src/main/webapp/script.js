@@ -36,6 +36,18 @@ function openSection(evt, sectionName) {
 }
 
 /*
+ * Fetch message from server then displays it
+ */
+async function fetchAndUpdateWelcomeMessage() {
+  const response = await fetch('/welcome_message');
+  const message = await response.text();
+  const messageContainer = document.getElementById('welcome-message-container');
+  if (messageContainer !== null) {
+    messageContainer.innerText = message;
+  }
+}
+
+/*
  * Takes in a string and creates a list element
  *
  * @params { text } text: string
