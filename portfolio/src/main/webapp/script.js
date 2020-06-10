@@ -13,11 +13,11 @@
 // limitations under the License.
 
 /*
-* Finds the tab that has been selected and display that tab
-*
-* @params { object } evt: HTML event
-* @params { sectionName } string: section Name
-*/
+ * Finds the tab that has been selected and display that tab
+ *
+ * @params { object } evt: HTML event
+ * @params { sectionName } string: section Name
+ */
 function openSection(evt, sectionName) {
   const tabContents = document.getElementsByClassName("tab-content");
   for (let i = 0; i < tabContents.length; i++) {
@@ -48,15 +48,15 @@ async function fetchAndUpdateWelcomeMessage() {
     messageContainer.innerText = message;
   }
 }
+
+/** Creates list element from string */
 const createListElement = (text) => {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
 }
 
-/*
- * Fetch comments from server then adds it to the dom
- */
+/** Fetch comments from server then adds it to the dom */
 async function fetchAndUpdateComments() {
   const response = await fetch('/comments');
   const comments = await response.json();

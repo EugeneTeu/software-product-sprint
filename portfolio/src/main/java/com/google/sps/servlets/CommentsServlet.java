@@ -22,15 +22,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns a list of comment.*/
+/** Servlet that returns a list of comment. */
 @WebServlet("/comments")
 public class CommentsServlet extends HttpServlet {
 
   private ArrayList<String> comments;
 
-  /**
-   * Initalise list of comments and add values to it.
-   */
+  /** Initalise list of comments and add values to it. */
   @Override 
   public void init() {
     comments = new ArrayList<String>();
@@ -39,9 +37,7 @@ public class CommentsServlet extends HttpServlet {
     comments.add("The sky is very bright today!");
   }
 
-  /**
-   * Converts a ServerStats instance into a JSON string using the Gson library. 
-   */
+  /** Converts an arrayList of strings into a JSON string using the Gson library. */
   private String convertToJsonUsingGson(ArrayList<String> list) {
     Gson gson = new Gson();
     String json = gson.toJson(list);
