@@ -32,9 +32,10 @@ public class CommentsServlet extends HttpServlet {
   @Override 
   public void init() {
     comments = new ArrayList<String>();
+    /*
     comments.add("Hello nice to meet you!");
     comments.add("It is a beautiful sunny day!");
-    comments.add("The sky is very bright today!");
+    comments.add("The sky is very bright today!");*/
   }
 
   /** Converts an arrayList of strings into a JSON string using the Gson library. */
@@ -52,4 +53,31 @@ public class CommentsServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(commentsJson);
   }
+
+  /**
+   * @return the request parameter, or the default value if the parameter
+   *         was not specified by the client
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  @Override 
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String text = getParameter(request, "user-comment", "");
+    if (text.isEmpty()) {
+      response.setContentType("text/html");
+      response.getWriter().println("Please enter comment");
+      return;
+    }
+    comments.add(text);
+    // Redirect back to the HTML page.
+    response.sendRedirect("/index.html");
+  }
+
 }

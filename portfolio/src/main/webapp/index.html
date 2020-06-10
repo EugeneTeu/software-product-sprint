@@ -23,10 +23,6 @@
     <div id="home" class="tab-content">
       <h1 class="m-title">Eugene Teu</h1>
       <h2>Software Engineering. Computer Science.</h2>
-      <button onclick="fetchAndUpdateWelcomeMessage()">Fetch message</button>
-      <div id="welcome-message-container"></div>
-      <button onclick="fetchAndUpdateComments()">Fetch comments</button>
-      <div id="comments-container"></div>
     </div>
     <!-- Tab content -->
     <div id="about" class="tab-content">
@@ -205,6 +201,24 @@
             </dd>
           </dl>
         </div>
+      </div>
+
+      <div id="sps" class="tab-content">
+
+        <body onload="fetchAndUpdateWelcomeMessage()">
+          <button onclick="fetchAndUpdateWelcomeMessage()">Fetch message</button>
+          <div id="welcome-message-container"></div>
+          <button onclick="fetchAndUpdateComments()">Fetch comments</button>
+          <div id="comments-container"></div>
+          <form action="/comments" method="POST">
+            <br></br>
+            <h2>Add Comment</h2>
+            <input type="text" name="user-comment" placeholder="comment here">
+            <br><br>
+            <input type="submit" value="Submit">
+            <br></br>
+          </form>
+        </body>
       </div>
 </body>
 
