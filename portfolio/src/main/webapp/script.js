@@ -35,11 +35,7 @@ function openSection(evt, sectionName) {
   }
 }
 
-/*
- * Takes in a string and creates a list element
- *
- * @params { text } text: string
- */
+/** Fetch welcome message from server then adds it to the dom */
 async function fetchAndUpdateWelcomeMessage() {
   const response = await fetch('/welcome_message');
   const message = await response.text();
@@ -49,7 +45,11 @@ async function fetchAndUpdateWelcomeMessage() {
   }
 }
 
-/** Creates list element from string */
+/*
+ * Takes in a string and creates a list element
+ *
+ * @params { text } text: string
+ */
 const createListElement = (text) => {
   const liElement = document.createElement('li');
   liElement.innerText = text;
