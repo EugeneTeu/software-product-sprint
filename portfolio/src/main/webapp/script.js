@@ -34,3 +34,15 @@ function openSection(evt, sectionName) {
     evt.currentTarget.className += " active";
   }
 }
+
+/*
+ * Fetch message from server then displays it
+ */
+async function fetchAndUpdateWelcomeMessage() {
+  const response = await fetch('/welcome_message');
+  const message = await response.text();
+  const messageContainer = document.getElementById('welcome-message-container');
+  if (messageContainer !== null) {
+    messageContainer.innerText = message;
+  }
+}
