@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+// style guide: https://google.github.io/styleguide/jsguide.html
 
 /*
  * Finds the tab that has been selected and display that tab
@@ -49,6 +50,7 @@ async function fetchAndUpdateWelcomeMessage() {
  * Takes in a string and creates a list element
  *
  * @params { text } text: string
+ * @return { HTMLElement } : <li>string</li>
  */
 const createListElement = (text) => {
   const liElement = document.createElement('li');
