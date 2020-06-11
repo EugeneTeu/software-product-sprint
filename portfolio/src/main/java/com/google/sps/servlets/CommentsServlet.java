@@ -29,12 +29,6 @@ public class CommentsServlet extends HttpServlet {
   private final ArrayList<String> comments = new ArrayList<String>();
   private final Gson gson = new Gson();
 
-  /** Initalise list of comments and add values to it. */
-  @Override 
-  public void init() {
-    comments = new ArrayList<String>();
-  }
-
   /** Converts an arrayList of strings into a JSON string using the Gson library. */
   private String convertToJsonUsingGson(ArrayList<String> list) {
     String json = gson.toJson(list);
