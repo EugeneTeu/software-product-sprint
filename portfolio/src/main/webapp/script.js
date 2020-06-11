@@ -11,13 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+// style guide: https://google.github.io/styleguide/jsguide.html
 
 /*
-* Finds the tab that has been selected and display that tab
-*
-* @params { object } evt: HTML event
-* @params { sectionName } string: section Name
-*/
+ * Finds the tab that has been selected and display that tab
+ *
+ * @params { object } evt: HTML event
+ * @params { sectionName } string: section Name
+ */
 function openSection(evt, sectionName) {
   const tabContents = document.getElementsByClassName("tab-content");
   for (let i = 0; i < tabContents.length; i++) {
@@ -35,14 +36,37 @@ function openSection(evt, sectionName) {
   }
 }
 
-/*
- * Fetch message from server then displays it
- */
+/** Fetch welcome message from server then adds it to the dom */
 async function fetchAndUpdateWelcomeMessage() {
   const response = await fetch('/welcome_message');
   const message = await response.text();
   const messageContainer = document.getElementById('welcome-message-container');
   if (messageContainer !== null) {
     messageContainer.innerText = message;
+  }
+}
+
+/*
+ * Takes in a string and creates a list element
+ *
+ * @params { text } text: string
+ * @return { HTMLElement } : <li>string</li>
+ */
+const createListElement = (text) => {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+/** Fetch comments from server then adds it to the dom */
+async function fetchAndUpdateComments() {
+  const response = await fetch('/comments');
+  const comments = await response.json();
+  const commentsContainer = document.getElementById('comments-container');
+  if (commentsContainer !== null) {
+    commentsContainer.innerHTML = '';
+    if (comments && comments.length !== 0) {
+      comments.forEach((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment}`)));
+    }
   }
 }
