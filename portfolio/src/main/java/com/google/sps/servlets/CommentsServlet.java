@@ -26,21 +26,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class CommentsServlet extends HttpServlet {
 
-  private ArrayList<String> comments;
+  private final ArrayList<String> comments = new ArrayList<String>();
+  private final Gson gson = new Gson();
 
   /** Initalise list of comments and add values to it. */
   @Override 
   public void init() {
     comments = new ArrayList<String>();
-    /*
-    comments.add("Hello nice to meet you!");
-    comments.add("It is a beautiful sunny day!");
-    comments.add("The sky is very bright today!");*/
   }
 
   /** Converts an arrayList of strings into a JSON string using the Gson library. */
   private String convertToJsonUsingGson(ArrayList<String> list) {
-    Gson gson = new Gson();
     String json = gson.toJson(list);
     return json;
   }

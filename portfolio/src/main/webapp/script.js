@@ -66,7 +66,7 @@ async function fetchAndUpdateComments() {
   if (commentsContainer !== null) {
     commentsContainer.innerHTML = '';
     if (comments && comments.length !== 0) {
-      comments.map((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment}`)));
+      comments.forEach((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment}`)));
     }
   }
 }
