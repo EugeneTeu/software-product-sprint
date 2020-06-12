@@ -15,7 +15,7 @@
 package com.google.sps.data;
 
 /** A comment on the portfolio site */
-public final class Coment {
+public final class Comment {
 
   private final long id;
   private final String text;
