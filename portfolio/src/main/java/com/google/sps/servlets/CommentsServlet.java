@@ -79,7 +79,7 @@ public class CommentsServlet extends HttpServlet {
 
     // TODO:  convert this to use datastore (next pr)
     comments.add(text);
-    // Redirect back to the HTML page.
+    // Redirect back to the Home page.
     response.sendRedirect("/index.html");
   }
 
