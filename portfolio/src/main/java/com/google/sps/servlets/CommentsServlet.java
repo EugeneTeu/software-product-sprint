@@ -14,6 +14,10 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import com.google.gson.Gson;
@@ -28,6 +32,7 @@ public class CommentsServlet extends HttpServlet {
 
   private final ArrayList<String> comments = new ArrayList<String>();
   private final Gson gson = new Gson();
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   /** Converts an arrayList of strings into a JSON string using the Gson library. */
   private String convertToJsonUsingGson(ArrayList<String> list) {
@@ -58,12 +63,21 @@ public class CommentsServlet extends HttpServlet {
   @Override 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
+    // TODO: add user input sanitation
     String text = getParameter(request, "user-comment", "");
     if (text.isEmpty()) {
       response.setContentType("text/html");
       response.getWriter().println("Please enter comment");
       return;
     }
+
+    long timestamp = System.currentTimeMillis();
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("text", text);
+    commentEntity.setProperty("timestamp", timestamp);
+    datastore.put(commentEntity);
+
+    // TODO:  convert this to use datastore (next pr)
     comments.add(text);
     // Redirect back to the HTML page.
     response.sendRedirect("/index.html");
