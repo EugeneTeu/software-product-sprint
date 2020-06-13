@@ -26,7 +26,7 @@ public class QueryHandler {
 
   /** Get all comments from datastore */
   public List<Comment> getAllComments() {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query(Comment.Comment).addSort(Comment.TIMESTAMP, SortDirection.DESCENDING);
     List<Comment> comments = new ArrayList();
     PreparedQuery results = this.datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
