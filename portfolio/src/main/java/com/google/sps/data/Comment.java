@@ -14,16 +14,24 @@
 
 package com.google.sps.data;
 
+import com.google.appengine.api.datastore.Entity;
+
 /** A comment on the portfolio site */
 public final class Comment {
 
-  private final long id;
   private final String text;
   private final long timestamp;
 
-  public Comment(long id, String text, long timestamp) {
-    this.id = id;
-    this.text= text;
+  public Comment(String text, long timestamp) {
+    this.text = text;
     this.timestamp = timestamp;
+  }
+
+  /** Convert current Comment instance into Entity */
+  public Entity toEntity() {
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("text", this.text);
+    commentEntity.setProperty("timestamp", this.timestamp);
+    return commentEntity;
   }
 }

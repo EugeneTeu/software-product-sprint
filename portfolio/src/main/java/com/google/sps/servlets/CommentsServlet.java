@@ -21,6 +21,7 @@ import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,9 @@ public class CommentsServlet extends HttpServlet {
   private final Gson gson = new Gson();
   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-  /** Converts an arrayList of strings into a JSON string using the Gson library. */
+  /**
+   * Converts an arrayList of strings into a JSON string using the Gson library.
+   */
   private String convertToJsonUsingGson(ArrayList<String> list) {
     String json = gson.toJson(list);
     return json;
@@ -50,7 +53,8 @@ public class CommentsServlet extends HttpServlet {
   }
 
   /**
-   * @return the request parameter, or the default value if the parameter was not specified by the client
+   * @return the request parameter, or the default value if the parameter was not
+   *         specified by the client
    */
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -60,7 +64,7 @@ public class CommentsServlet extends HttpServlet {
     return value;
   }
 
-  @Override 
+  @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     // TODO: add user input sanitation
@@ -72,12 +76,10 @@ public class CommentsServlet extends HttpServlet {
     }
 
     long timestamp = System.currentTimeMillis();
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("text", text);
-    commentEntity.setProperty("timestamp", timestamp);
-    datastore.put(commentEntity);
+    Comment comment = new Comment(text, timestamp);
+    datastore.put(comment.toEntity());
 
-    // TODO:  convert this to use datastore (next pr)
+    // TODO: convert this to use datastore (next pr)
     comments.add(text);
     // Redirect back to the Home page.
     response.sendRedirect("/index.html");
