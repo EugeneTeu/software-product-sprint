@@ -7,6 +7,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import java.util.ArrayList;
+import java.util.List;
 import com.google.sps.data.Comment;
 
 /** QueryHandler to handle all queries between datastore and api endpoints. */
@@ -24,14 +25,14 @@ public class QueryHandler {
   }
 
   /** Get all comments from datastore */
-  public ArrayList<Comment> getAllComments() {
+  public List<Comment> getAllComments() {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-    ArrayList<Comment> comments = new ArrayList();
+    List<Comment> comments = new ArrayList();
     PreparedQuery results = this.datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
-      String text = (String) entity.getProperty("text");
-      long timestamp = (long) entity.getProperty("timestamp");
+      String text = (String) entity.getProperty(Comment.TEXT);
+      long timestamp = (long) entity.getProperty(Comment.TIMESTAMP);
       Comment comment = new Comment(id, text, timestamp);
       comments.add(comment);
     }

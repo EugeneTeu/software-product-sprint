@@ -18,7 +18,7 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import com.google.sps.queries.QueryHandler;
@@ -31,26 +31,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class CommentsServlet extends HttpServlet {
 
-  private final ArrayList<Comment> comments = new ArrayList<Comment>();
   private final Gson gson = new Gson();
   private final QueryHandler queryHandler = new QueryHandler(DatastoreServiceFactory.getDatastoreService());
 
-  /** Converts an arrayList of Comment into a JSON string using the Gson library. */
-  private String convertToJsonUsingGson(ArrayList<Comment> list) {
+  /** Converts an list of Comment into a JSON string using the Gson library. */
+  private String convertToJsonUsingGson(List<Comment> list) {
     String json = gson.toJson(list);
     return json;
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<Comment> commentsResult = queryHandler.getAllComments();
-    // remove all current elements
-    this.comments.clear();
-
-    this.comments.addAll(commentsResult);
-
+    List<Comment> comments = queryHandler.getAllComments();
     String commentsJson = convertToJsonUsingGson(comments);
-
     // Send the JSON as the response
     response.setContentType("application/json;");
     response.getWriter().println(commentsJson);

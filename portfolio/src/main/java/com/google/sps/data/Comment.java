@@ -23,6 +23,10 @@ public final class Comment {
   private final String text;
   private final long timestamp;
 
+  public static final String TEXT = "text";
+  public static final String COMMENT = "Comment";
+  public static final String TIMESTAMP = "timestamp";
+
   public Comment(long id, String text, long timestamp) {
     this.id = id;
     this.text = text;
@@ -36,9 +40,9 @@ public final class Comment {
 
   /** Convert current Comment instance into Entity */
   public Entity toEntity() {
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("text", this.text);
-    commentEntity.setProperty("timestamp", this.timestamp);
+    Entity commentEntity = new Entity(this.COMMENT);
+    commentEntity.setProperty(this.TEXT, this.text);
+    commentEntity.setProperty(this.TIMESTAMP, this.timestamp);
     return commentEntity;
   }
 }
