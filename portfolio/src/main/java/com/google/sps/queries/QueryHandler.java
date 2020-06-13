@@ -20,13 +20,17 @@ public class QueryHandler {
   }
 
   /** Add a comment to datastore */
-  public void addComment(Comment comment) {
-    datastore.put(comment.toEntity());
+  public void addComment(String text) {
+    long timestamp = System.currentTimeMillis();
+    Entity commentEntity = new Entity(Comment.COMMENT);
+    commentEntity.setProperty(Comment.TEXT, text);
+    commentEntity.setProperty(Comment.TIMESTAMP, timestamp);
+    datastore.put(commentEntity);
   }
 
   /** Get all comments from datastore */
   public List<Comment> getAllComments() {
-    Query query = new Query(Comment.Comment).addSort(Comment.TIMESTAMP, SortDirection.DESCENDING);
+    Query query = new Query(Comment.COMMENT).addSort(Comment.TIMESTAMP, SortDirection.DESCENDING);
     List<Comment> comments = new ArrayList();
     PreparedQuery results = this.datastore.prepare(query);
     for (Entity entity : results.asIterable()) {

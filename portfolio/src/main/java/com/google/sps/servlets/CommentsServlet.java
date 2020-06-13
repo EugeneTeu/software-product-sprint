@@ -68,10 +68,7 @@ public class CommentsServlet extends HttpServlet {
       response.getWriter().println("Please enter comment");
       return;
     }
-
-    long timestamp = System.currentTimeMillis();
-    Comment comment = Comment.getCommentWithoutID(text, timestamp);
-    queryHandler.addComment(comment);
+    queryHandler.addComment(text);
     // Redirect back to the Home page.
     response.sendRedirect("/index.html");
   }
