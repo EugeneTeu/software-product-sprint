@@ -16,12 +16,12 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.queries.QueryHandler;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,18 +31,24 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class CommentsServlet extends HttpServlet {
 
-  private final ArrayList<String> comments = new ArrayList<String>();
+  private final ArrayList<Comment> comments = new ArrayList<Comment>();
   private final Gson gson = new Gson();
-  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private final QueryHandler queryHandler = new QueryHandler(DatastoreServiceFactory.getDatastoreService());
 
-  /** Converts an arrayList of strings into a JSON string using the Gson library. */
-  private String convertToJsonUsingGson(ArrayList<String> list) {
+  /** Converts an arrayList of Comment into a JSON string using the Gson library. */
+  private String convertToJsonUsingGson(ArrayList<Comment> list) {
     String json = gson.toJson(list);
     return json;
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    ArrayList<Comment> commentsResult = queryHandler.getAllComments();
+    // remove all current elements
+    this.comments.clear();
+
+    this.comments.addAll(commentsResult);
+
     String commentsJson = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
@@ -71,11 +77,8 @@ public class CommentsServlet extends HttpServlet {
     }
 
     long timestamp = System.currentTimeMillis();
-    Comment comment = new Comment(text, timestamp);
-    datastore.put(comment.toEntity());
-
-    // TODO: convert this to use datastore (next pr)
-    comments.add(text);
+    Comment comment = Comment.getCommentWithoutID(text, timestamp);
+    queryHandler.addComment(comment);
     // Redirect back to the Home page.
     response.sendRedirect("/index.html");
   }

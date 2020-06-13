@@ -19,12 +19,19 @@ import com.google.appengine.api.datastore.Entity;
 /** A comment on the portfolio site */
 public final class Comment {
 
+  private final long id;
   private final String text;
   private final long timestamp;
 
-  public Comment(String text, long timestamp) {
+  public Comment(long id, String text, long timestamp) {
+    this.id = id;
     this.text = text;
     this.timestamp = timestamp;
+  }
+
+  /** Creates a comment without an ID */
+  public static Comment getCommentWithoutID(String text, long timestamp) {
+    return new Comment(-1, text, timestamp);
   }
 
   /** Convert current Comment instance into Entity */
