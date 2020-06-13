@@ -62,11 +62,12 @@ const createListElement = (text) => {
 async function fetchAndUpdateComments() {
   const response = await fetch('/comments');
   const comments = await response.json();
+  console.log(comments);
   const commentsContainer = document.getElementById('comments-container');
   if (commentsContainer !== null) {
     commentsContainer.innerHTML = '';
     if (comments && comments.length !== 0) {
-      comments.forEach((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment}`)));
+      comments.forEach((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment.text}`)));
     }
   }
 }
