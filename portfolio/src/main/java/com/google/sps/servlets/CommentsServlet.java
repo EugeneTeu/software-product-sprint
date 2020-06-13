@@ -35,9 +35,7 @@ public class CommentsServlet extends HttpServlet {
   private final Gson gson = new Gson();
   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-  /**
-   * Converts an arrayList of strings into a JSON string using the Gson library.
-   */
+  /** Converts an arrayList of strings into a JSON string using the Gson library. */
   private String convertToJsonUsingGson(ArrayList<String> list) {
     String json = gson.toJson(list);
     return json;
