@@ -62,6 +62,7 @@ const createListElement = (text) => {
 async function fetchAndUpdateComments() {
   const response = await fetch('/comments');
   const comments = await response.json();
+  console.log(comments);
   const commentsContainer = document.getElementById('comments-container');
   if (commentsContainer !== null) {
     commentsContainer.innerHTML = '';
