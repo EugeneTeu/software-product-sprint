@@ -13,25 +13,37 @@
 // limitations under the License.
 
 package com.google.sps.data;
-
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
 
 /** A comment on the portfolio site */
 public final class Comment {
 
-  private final String text;
-  private final long timestamp;
+  public static final String COMMENT_KIND = "Comment";
+  public static final String TEXT_PROPERTY = "text";
+  public static final String TIMESTAMP_PROPERTY = "timestamp";
 
-  public Comment(String text, long timestamp) {
+  private final Key commentKey;
+  private final String text;
+  private final long timestamp;  
+  
+  public Comment(Key commentKey, String text, long timestamp) {
+    this.commentKey = commentKey;
     this.text = text;
     this.timestamp = timestamp;
   }
 
-  /** Convert current Comment instance into Entity */
-  public Entity toEntity() {
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("text", this.text);
-    commentEntity.setProperty("timestamp", this.timestamp);
-    return commentEntity;
+  public Comment(Entity entity) {
+    this(entity.getKey(), (String) entity.getProperty(Comment.TEXT_PROPERTY), 
+    (long) entity.getProperty(Comment.TIMESTAMP_PROPERTY));
   }
+
+  /** Takes in string text to convert into Entity */
+  public static Entity toEntity(String text) {
+    Entity commentEntity = new Entity(Comment.COMMENT_KIND);
+    commentEntity.setProperty(TEXT_PROPERTY, text);
+    commentEntity.setProperty(TIMESTAMP_PROPERTY, System.currentTimeMillis());
+    return commentEntity;
+  }   
+
 }
