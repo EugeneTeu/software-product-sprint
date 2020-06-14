@@ -14,7 +14,7 @@
 
 package com.google.sps.data;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.key;
+import com.google.appengine.api.datastore.Key;
 
 /** A comment on the portfolio site */
 public final class Comment {
@@ -34,17 +34,22 @@ public final class Comment {
   }
 
   public Comment(Entity entity) {
-    Key commentKey = entity.getKey();
-    String text = (String) entity.getProperty(Comment.TEXT_PROPERTY);
-    long timestamp = (long) entity.getProperty(Comment.TIMESTAMP_PROPERTY);
-    this(commentKey, text, timestamp);
+    this(entity.getKey(), (String) entity.getProperty(Comment.TEXT_PROPERTY), (long) entity.getProperty(Comment.TIMESTAMP_PROPERTY));
   }
 
-  /** Convert current Comment instance into Entity */
+
+  /** Takes in string text to convert into Entity */
+  public static Entity toEntity(String text) {
+    Entity commentEntity = new Entity(Comment.COMMENT_KIND);
+    commentEntity.setProperty(TEXT_PROPERTY, text);
+    commentEntity.setProperty(TIMESTAMP_PROPERTY, System.currentTimeMillis());
+    return commentEntity;
+  }    /** Convert current Comment instance into Entity */
   public Entity toEntity() {
-    Entity commentEntity = new Entity(COMMENT_KIND, this.commentKey);
-    commentEntity.setProperty(TEXT_Property, this.text);
+    Entity commentEntity = new Entity(COMMENT_KIND);
+    commentEntity.setProperty(TEXT_PROPERTY, this.text);
     commentEntity.setProperty(TIMESTAMP_PROPERTY, this.timestamp);
     return commentEntity;
   }
+
 }
