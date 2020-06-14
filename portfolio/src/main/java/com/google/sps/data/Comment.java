@@ -25,16 +25,18 @@ public final class Comment {
 
   private final Key commentKey;
   private final String text;
-  private final long timestamp;  public Comment(Key commentKey, String text, long timestamp) {
+  private final long timestamp;  
+  
+  public Comment(Key commentKey, String text, long timestamp) {
     this.commentKey = commentKey;
     this.text = text;
     this.timestamp = timestamp;
   }
 
   public Comment(Entity entity) {
-    this(entity.getKey(), (String) entity.getProperty(Comment.TEXT_PROPERTY), (long) entity.getProperty(Comment.TIMESTAMP_PROPERTY));
+    this(entity.getKey(), (String) entity.getProperty(Comment.TEXT_PROPERTY), 
+    (long) entity.getProperty(Comment.TIMESTAMP_PROPERTY));
   }
-
 
   /** Takes in string text to convert into Entity */
   public static Entity toEntity(String text) {
@@ -42,12 +44,6 @@ public final class Comment {
     commentEntity.setProperty(TEXT_PROPERTY, text);
     commentEntity.setProperty(TIMESTAMP_PROPERTY, System.currentTimeMillis());
     return commentEntity;
-  }    /** Convert current Comment instance into Entity */
-  public Entity toEntity() {
-    Entity commentEntity = new Entity(COMMENT_KIND);
-    commentEntity.setProperty(TEXT_PROPERTY, this.text);
-    commentEntity.setProperty(TIMESTAMP_PROPERTY, this.timestamp);
-    return commentEntity;
-  }
+  }   
 
 }

@@ -1,7 +1,6 @@
 package com.google.sps.queries;
 
 import com.google.appengine.api.datastore.DatastoreService;
-
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -9,9 +8,9 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Key;
+import com.google.sps.data.Comment;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.sps.data.Comment;
 
 /** QueryHandler to handle all queries between datastore and api endpoints. */
 public class QueryHandler { 
