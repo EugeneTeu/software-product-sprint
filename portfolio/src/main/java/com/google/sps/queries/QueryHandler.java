@@ -2,10 +2,12 @@ package com.google.sps.queries;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.key;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.sps.data.Comment;
@@ -14,30 +16,26 @@ import com.google.sps.data.Comment;
 public class QueryHandler { 
 
   private final DatastoreService datastore;
+  private final KeyFactory commentKeyFactory;
 
   public QueryHandler(DatastoreService datastore) {
     this.datastore = datastore;
+    this.commentKeyFactory = datastore.newKeyFactory().setKind(Comment.COMMENT_KIND)
   }
 
   /** Add a comment to datastore */
   public void addComment(String text) {
-    long timestamp = System.currentTimeMillis();
-    Entity commentEntity = new Entity(Comment.COMMENT);
-    commentEntity.setProperty(Comment.TEXT, text);
-    commentEntity.setProperty(Comment.TIMESTAMP, timestamp);
-    datastore.put(commentEntity);
+    Comment comment = new comment(datastore.allocateId(commentKeyFactory.newKey(), text, System.currentTimeMillis()));
+    datastore.put(commentEntity.toEntity());
   }
 
   /** Get all comments from datastore */
   public List<Comment> getAllComments() {
-    Query query = new Query(Comment.COMMENT).addSort(Comment.TIMESTAMP, SortDirection.DESCENDING);
+    Query query = new Query(Comment.COMMENT_KIND).addSort(Comment.TIMESTAMP_PROPERTY, SortDirection.DESCENDING);
     List<Comment> comments = new ArrayList();
     PreparedQuery results = this.datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String text = (String) entity.getProperty(Comment.TEXT);
-      long timestamp = (long) entity.getProperty(Comment.TIMESTAMP);
-      Comment comment = new Comment(id, text, timestamp);
+      Comment comment = new Comment(entity);
       comments.add(comment);
     }
     return comments;

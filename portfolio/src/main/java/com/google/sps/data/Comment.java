@@ -14,34 +14,37 @@
 
 package com.google.sps.data;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.key;
 
 /** A comment on the portfolio site */
 public final class Comment {
 
-  private final long id;
+  private final Key commentKey;
   private final String text;
   private final long timestamp;
 
-  public static final String TEXT = "text";
-  public static final String COMMENT = "Comment";
-  public static final String TIMESTAMP = "timestamp";
+  public static final String COMMENT_KIND = "Comment";
+  public static final String TEXT_PROPERTY = "text";
+  public static final String TIMESTAMP_PROPERTY = "timestamp";
 
-  public Comment(long id, String text, long timestamp) {
-    this.id = id;
+  public Comment(Key commentKey, String text, long timestamp) {
+    this.commentKey = commentKey;
     this.text = text;
     this.timestamp = timestamp;
   }
 
-  /** Creates a comment without an ID */
-  public static Comment getCommentWithoutID(String text, long timestamp) {
-    return new Comment(-1, text, timestamp);
+  public Comment(Entity entity) {
+    Key commentKey = entity.getKey();
+    String text = (String) entity.getProperty(Comment.TEXT_PROPERTY);
+    long timestamp = (long) entity.getProperty(Comment.TIMESTAMP_PROPERTY);
+    this(commentKey, text, timestamp);
   }
 
   /** Convert current Comment instance into Entity */
   public Entity toEntity() {
-    Entity commentEntity = new Entity(this.COMMENT);
-    commentEntity.setProperty(this.TEXT, this.text);
-    commentEntity.setProperty(this.TIMESTAMP, this.timestamp);
+    Entity commentEntity = new Entity(COMMENT_KIND, this.commentKey);
+    commentEntity.setProperty(TEXT_Property, this.text);
+    commentEntity.setProperty(TIMESTAMP_PROPERTY, this.timestamp);
     return commentEntity;
   }
 }
