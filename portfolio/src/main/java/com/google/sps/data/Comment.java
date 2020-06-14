@@ -19,15 +19,13 @@ import com.google.appengine.api.datastore.Key;
 /** A comment on the portfolio site */
 public final class Comment {
 
-  private final Key commentKey;
-  private final String text;
-  private final long timestamp;
-
   public static final String COMMENT_KIND = "Comment";
   public static final String TEXT_PROPERTY = "text";
   public static final String TIMESTAMP_PROPERTY = "timestamp";
 
-  public Comment(Key commentKey, String text, long timestamp) {
+  private final Key commentKey;
+  private final String text;
+  private final long timestamp;  public Comment(Key commentKey, String text, long timestamp) {
     this.commentKey = commentKey;
     this.text = text;
     this.timestamp = timestamp;
