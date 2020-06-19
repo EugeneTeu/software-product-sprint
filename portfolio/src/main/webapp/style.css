@@ -250,5 +250,5 @@ p {
 }
 
 .blob-store {
-  display: inline;
+  display: hidden;
 }

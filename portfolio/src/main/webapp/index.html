@@ -217,10 +217,10 @@
             <br></br>
           </form>
         </body>
-        <body class='blob-store'>
-        <h1>Blobstore Fetch Example</h1>
+        <body onload="fetchBlobstoreUrlAndShowForm()" class='blob-store'>
+        <h2>Blobstore Fetch Example</h2>
         <p>Type a message and click submit:</p>    
-        <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
+        <form id="my-form"  class='blob-store' method="POST" enctype="multipart/form-data">
           <p>Type some text:</p>
           <textarea name="message"></textarea>
           <br/>
