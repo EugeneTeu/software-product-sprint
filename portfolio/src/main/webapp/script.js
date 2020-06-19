@@ -38,9 +38,9 @@ function openSection(evt, sectionName) {
 
 /** Fetch welcome message from server then adds it to the dom */
 async function fetchAndUpdateWelcomeMessage() {
-  const response = await fetch('/welcome_message');
+  const response = await fetch("/welcome_message");
   const message = await response.text();
-  const messageContainer = document.getElementById('welcome-message-container');
+  const messageContainer = document.getElementById("welcome-message-container");
   if (messageContainer !== null) {
     messageContainer.innerText = message;
   }
@@ -53,21 +53,34 @@ async function fetchAndUpdateWelcomeMessage() {
  * @return { HTMLElement } : <li>string</li>
  */
 const createListElement = (text) => {
-  const liElement = document.createElement('li');
+  const liElement = document.createElement("li");
   liElement.innerText = text;
   return liElement;
-}
+};
 
 /** Fetch comments from server then adds it to the dom */
 async function fetchAndUpdateComments() {
-  const response = await fetch('/comments');
+  const response = await fetch("/comments");
   const comments = await response.json();
   console.log(comments);
-  const commentsContainer = document.getElementById('comments-container');
+  const commentsContainer = document.getElementById("comments-container");
   if (commentsContainer !== null) {
-    commentsContainer.innerHTML = '';
+    commentsContainer.innerHTML = "";
     if (comments && comments.length !== 0) {
-      comments.forEach((comment, index) => commentsContainer.appendChild(createListElement(`comment ${index + 1}: ${comment.text}`)));
+      comments.forEach((comment, index) =>
+        commentsContainer.appendChild(
+          createListElement(`comment ${index + 1}: ${comment.text}`)
+        )
+      );
     }
+  }
+
+  /** Fetch image from Url */
+  async function fetchBlobstoreUrlAndShowForm() {
+    const response = await fetch("/blobstore-upload-url");
+    const imageUploadUrl = response.text();
+    const messageForm = document.getElementById("my-form");
+    messageForm.action = imageUploadUrl;
+    messageForm.classList.remove("blob-store");
   }
 }
