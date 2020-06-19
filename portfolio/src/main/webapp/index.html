@@ -17,6 +17,10 @@
     $(function(){
     $("#nav-placeholder").load("nav.html");
   });
+  window.onload=function(){
+    fetchAndUpdateWelcomeMessage();
+    fetchBlobstoreUrlAndShowForm();
+  }
   </script>
   <!--end of Navigation bar-->
   <div id="content">
@@ -204,23 +208,25 @@
       </div>
 
       <div id="sps" class="tab-content">
-        <body onload="fetchAndUpdateWelcomeMessage()">
-          <div id="welcome-message-container"></div>
-          <button onclick="fetchAndUpdateComments()">Fetch comments</button>
-          <div id="comments-container"></div>
-          <form action="/comments" method="POST">
-            <br></br>
-            <h2>Add Comment</h2>
-            <input type="text" name="user-comment" placeholder="comment here">
-            <br><br>
-            <input type="submit" value="Submit">
-            <br></br>
-          </form>
-        </body>
-        <body onload="fetchBlobstoreUrlAndShowForm()" class='blob-store'>
+
+
+        <div id="welcome-message-container"></div>
+        <button onclick="fetchAndUpdateComments()">Fetch comments</button>
+        <div id="comments-container"></div>
+        <form action="/comments" method="POST">
+          <br></br>
+          <h2>Add Comment</h2>
+          <input type="text" name="user-comment" placeholder="comment here">
+          <br><br>
+          <input type="submit" value="Submit">
+          <br></br>
+        </form>
+
+
+
         <h2>Blobstore Fetch Example</h2>
-        <p>Type a message and click submit:</p>    
-        <form id="my-form"  class='blob-store' method="POST" enctype="multipart/form-data">
+        <p>Type a message and click submit:</p>
+        <form id="my-form" class='blob-store' method="POST" enctype="multipart/form-data">
           <p>Type some text:</p>
           <textarea name="message"></textarea>
           <br/>
@@ -229,7 +235,7 @@
           <br/><br/>
           <button>Submit</button>
         </form>
-      </body>
+
       </div>
 </body>
 

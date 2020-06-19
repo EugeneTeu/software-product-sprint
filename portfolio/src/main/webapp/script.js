@@ -74,13 +74,16 @@ async function fetchAndUpdateComments() {
       );
     }
   }
-
-  /** Fetch image from Url */
-  async function fetchBlobstoreUrlAndShowForm() {
-    const response = await fetch("/blobstore-upload-url");
-    const imageUploadUrl = response.text();
-    const messageForm = document.getElementById("my-form");
-    messageForm.action = imageUploadUrl;
-    messageForm.classList.remove("blob-store");
-  }
 }
+
+/** Fetch image from Url */
+async function fetchBlobstoreUrlAndShowForm() {
+  console.log('running');
+  const response = await fetch("/blobstore-upload-url");
+  const imageUploadUrl = await response.text();
+  const messageForm = document.getElementById("my-form");
+  console.log(imageUploadUrl);
+  messageForm.action = imageUploadUrl;
+  messageForm.classList.remove("blob-store");
+}
+
