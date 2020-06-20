@@ -208,29 +208,16 @@
       </div>
 
       <div id="sps" class="tab-content">
-
-
         <div id="welcome-message-container"></div>
         <button onclick="fetchAndUpdateComments()">Fetch comments</button>
         <div id="comments-container"></div>
-        <form action="/comments" method="POST">
-          <br></br>
-          <h2>Add Comment</h2>
-          <input type="text" name="user-comment" placeholder="comment here">
-          <br><br>
-          <input type="submit" value="Submit">
-          <br></br>
-        </form>
-
-
-
-        <h2>Blobstore Fetch Example</h2>
+        <h2>Comments</h2>
         <p>Type a message and click submit:</p>
         <form id="my-form" class='blob-store' method="POST" enctype="multipart/form-data">
-          <p>Type some text:</p>
-          <textarea name="user-comment"></textarea>
+          <p>Comment</p>
+          <input type="text" name="user-comment" placeholder="comment here">
           <br/>
-          <p>Upload an image:</p>
+          <p>Image</p>
           <input type="file" name="image">
           <br/><br/>
           <button>Submit</button>

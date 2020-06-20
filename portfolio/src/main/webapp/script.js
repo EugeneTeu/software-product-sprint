@@ -76,13 +76,11 @@ async function fetchAndUpdateComments() {
   }
 }
 
-/** Fetch image from Url */
+/** Fetch image upload url and show form to submit comment with image */
 async function fetchBlobstoreUrlAndShowForm() {
-  console.log('running');
   const response = await fetch("/blobstore-upload-url");
   const imageUploadUrl = await response.text();
   const messageForm = document.getElementById("my-form");
-  console.log(imageUploadUrl);
   messageForm.action = imageUploadUrl;
   messageForm.classList.remove("blob-store");
 }
