@@ -16,16 +16,7 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.blobstore.BlobInfo;
-import com.google.appengine.api.blobstore.BlobInfoFactory;
-import com.google.appengine.api.blobstore.BlobKey;
-import com.google.appengine.api.blobstore.BlobstoreService;
-import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.images.ImagesService;
-import com.google.appengine.api.images.ImagesServiceFactory;
-import com.google.appengine.api.images.ServingUrlOptions;
 import java.io.IOException;
-import java.util.List;
 import java.util.List;
 import java.util.Map;
 import com.google.gson.Gson;
@@ -44,7 +35,6 @@ public class CommentsServlet extends HttpServlet {
 
   private final Gson gson = new Gson();
   private final QueryHandler queryHandler = new QueryHandler(DatastoreServiceFactory.getDatastoreService());
-  private final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
   private final ImageHandler imageHandler = new ImageHandler();
 
   /** Converts an list of Comment into a JSON string using the Gson library. */
