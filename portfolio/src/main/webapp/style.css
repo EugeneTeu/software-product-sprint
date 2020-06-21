@@ -1,7 +1,7 @@
 :root {
   overflow-x: auto;
   font-size: 16px;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
@@ -20,12 +20,12 @@ body::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-body::-webkit-scrollbar-track{
+body::-webkit-scrollbar-track {
   background: black;
 }
 
-body::-webkit-scrollbar-track-piece{
-  background:white;
+body::-webkit-scrollbar-track-piece {
+  background: white;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -50,11 +50,11 @@ body::-webkit-scrollbar-thumb {
   margin: 1rem;
   position: relative;
   width: 100%;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .card-content {
-  padding: 12px
+  padding: 12px;
 }
 
 .job {
@@ -64,7 +64,7 @@ body::-webkit-scrollbar-thumb {
   padding: 0;
   margin: 0;
   align-items: center;
-  width: 100%
+  width: 100%;
 }
 
 .job-item {
@@ -72,9 +72,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .tabcontent {
-  display:none;
+  display: none;
 }
-
 
 main {
   margin-left: 5rem; /*relative to font size*/
@@ -95,7 +94,6 @@ main {
 .social {
   margin-top: auto;
 }
-
 
 .nav-link {
   align-items: center;
@@ -143,32 +141,32 @@ main {
 }
 
 /* Font stuff */
-h1 { 
+h1 {
   color: #111;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 250px; 
-  font-weight: bold; 
-  letter-spacing: -1px; 
-  line-height: 1; 
-  text-align: center; 
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 250px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
 }
 
-h2 { 
-  color: #111; 
-  font-family: 'Open Sans', sans-serif;
-  font-size: 30px; 
-  font-weight: 300; 
-  line-height: 32px; 
-  text-align: center; 
+h2 {
+  color: #111;
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 32px;
+  text-align: center;
 }
 
-p { 
+p {
   color: #685206;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 14px; 
-  line-height: 24px;  
-  text-align: justify; 
-  text-justify: inter-word; 
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* utility classes */
@@ -181,15 +179,15 @@ p {
   #content {
     margin-left: auto;
     margin-right: auto;
-    padding: 24px
+    padding: 24px;
   }
-  
+
   h1 {
-    font-Size: 150px;
+    font-size: 150px;
   }
 
   h2 {
-    font-Size: 20px;
+    font-size: 20px;
   }
 
   .navbar {
@@ -206,7 +204,7 @@ p {
     list-style: none;
     display: flex;
     flex-direction: row;
-    align-items: center
+    align-items: center;
   }
   .nav-item {
     width: 100%;
@@ -222,7 +220,6 @@ p {
   .social {
     margin-top: 0px;
   }
-  
 }
 
 /* large screens */
@@ -250,4 +247,8 @@ p {
   .navbar:hover .link-text {
     display: block;
   }
+}
+
+.blob-store {
+  display: hidden;
 }

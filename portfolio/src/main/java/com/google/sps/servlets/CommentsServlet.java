@@ -16,12 +16,14 @@ package com.google.sps.servlets;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
-import com.google.sps.queries.QueryHandler;
+import java.io.PrintWriter;
+import com.google.sps.service.QueryHandler;
+import com.google.sps.service.ImageHandler;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,7 @@ public class CommentsServlet extends HttpServlet {
 
   private final Gson gson = new Gson();
   private final QueryHandler queryHandler = new QueryHandler(DatastoreServiceFactory.getDatastoreService());
+  private final ImageHandler imageHandler = new ImageHandler();
 
   /** Converts an list of Comment into a JSON string using the Gson library. */
   private String convertToJsonUsingGson(List<Comment> list) {
@@ -68,9 +71,21 @@ public class CommentsServlet extends HttpServlet {
       response.getWriter().println("Please enter comment");
       return;
     }
+    
     queryHandler.addComment(text);
-    // Redirect back to the Home page.
-    response.sendRedirect("/index.html");
+    
+    // Get the URL of the image that the user uploaded to Blobstore.
+    String imageUrl = imageHandler.getUploadedFileUrl(request, "image");
+    
+    // TODO: serve Blob
+    // Output some HTML that shows the data the user entered.
+    PrintWriter out = response.getWriter();
+    out.println("<p>Here's the image you uploaded:</p>");
+    out.println("<a href=\"" + imageUrl + "\">");
+    out.println("<img src=\"" + imageUrl + "\" />");
+    out.println("</a>");
+    out.println("<p>Here's the comment you entered:</p>");
+    out.println(text);
   }
 
 }

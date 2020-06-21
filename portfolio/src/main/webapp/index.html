@@ -17,6 +17,11 @@
     $(function(){
     $("#nav-placeholder").load("nav.html");
   });
+  window.onload=function(){
+    fetchAndUpdateWelcomeMessage();
+    fetchAndUpdateComments();
+    fetchBlobstoreUrlAndShowForm();
+  }
   </script>
   <!--end of Navigation bar-->
   <div id="content">
@@ -204,20 +209,21 @@
       </div>
 
       <div id="sps" class="tab-content">
-        <body onload="fetchAndUpdateWelcomeMessage()">
-          <div id="welcome-message-container"></div>
-          <button onclick="fetchAndUpdateComments()">Fetch comments</button>
-          <div id="comments-container"></div>
-          <form action="/comments" method="POST">
-            <br></br>
-            <h2>Add Comment</h2>
-            <input type="text" name="user-comment" placeholder="comment here">
-            <br><br>
-            <input type="submit" value="Submit">
-            <br></br>
-          </form>
-        </body>
+        <div id="welcome-message-container"></div>
+        <button onclick="fetchAndUpdateComments()">Fetch comments</button>
+        <div id="comments-container"></div>
+        <h2>Comments</h2>
+        <p>Type a message and click submit:</p>
+        <form id="my-form" class='blob-store' method="POST" enctype="multipart/form-data">
+          <p>Comment</p>
+          <input type="text" name="user-comment" placeholder="comment here">
+          <br/>
+          <p>Image</p>
+          <input type="file" name="image">
+          <br/><br/>
+          <button>Submit</button>
+        </form>
+
       </div>
 </body>
-
 </html>
