@@ -32,10 +32,13 @@ import javax.servlet.http.HttpServletResponse;
 /** Image handler class that handles image upload. */
 public class ImageHandler {
 
+  public static final String LOCAL_HOST_URL = "http://localhost:8080/";
+  public static final String URL_SLASH = "/";
+
   private final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
    /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
-  public String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
+  public  @Nullable String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get("image");
 
@@ -53,7 +56,7 @@ public class ImageHandler {
       blobstoreService.delete(blobKey);
       return null;
     }
-    //TODO: validation
+    // TODO: validation
     // We could check the validity of the file here, e.g. to make sure it's an image file
     // https://stackoverflow.com/q/10779564/873165
 
@@ -64,8 +67,8 @@ public class ImageHandler {
 
     // GCS's localhost preview is not actually on localhost,
     // so make the URL relative to the current domain.
-    if(url.startsWith("http://localhost:8080/")){
-      url = url.replace("http://localhost:8080/", "/");
+    if(url.startsWith(LOCAL_HOST_URL)){
+      url = url.replace(LOCAL_HOST_URL, URL_SLASH);
     }
     return url;
   }

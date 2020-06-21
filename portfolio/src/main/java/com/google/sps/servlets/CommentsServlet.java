@@ -77,7 +77,7 @@ public class CommentsServlet extends HttpServlet {
     // Get the URL of the image that the user uploaded to Blobstore.
     String imageUrl = imageHandler.getUploadedFileUrl(request, "image");
     
-    //TODO: serve Blob
+    // TODO: serve Blob
     // Output some HTML that shows the data the user entered.
     PrintWriter out = response.getWriter();
     out.println("<p>Here's the image you uploaded:</p>");

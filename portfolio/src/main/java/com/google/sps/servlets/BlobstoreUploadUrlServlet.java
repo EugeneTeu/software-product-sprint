@@ -25,10 +25,10 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for return url to servlet for user to upload. */
 @WebServlet("/blobstore-upload-url")
 public class BlobstoreUploadUrlServlet extends HttpServlet {
+  private final  BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { 
     String uploadUrl = blobstoreService.createUploadUrl("/comments");
 
     response.setContentType("text/html");
