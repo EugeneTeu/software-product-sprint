@@ -38,8 +38,9 @@ public class ImageHandler {
 
   private final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
-   /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
-  public @Nullable String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
+  /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
+  @Nullable
+  public String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get("image");
 
