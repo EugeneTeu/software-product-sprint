@@ -72,7 +72,7 @@ public final class FindMeetingQueryTest {
     Assert.assertEquals(expected, actual);
   }
 
-  /*
+  
 
   @Test
   public void noOptionsForTooLongOfARequest() {
@@ -85,7 +85,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void eventSplitsRestriction() {
     // The event should split the day into two options (before and after the event).
@@ -101,7 +101,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void everyAttendeeIsConsidered() {
     // Have each person have different events. We should see two options because each person has
@@ -230,6 +230,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
+  
 
   @Test
   public void ignoresPeopleNotAttending() {
@@ -255,7 +256,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void notEnoughRoom() {
     // Have one person, but make it so that there is not enough room at any point in the day to
@@ -277,5 +278,5 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> expected = Arrays.asList();
 
     Assert.assertEquals(expected, actual);
-  }*/
+  }
 }
