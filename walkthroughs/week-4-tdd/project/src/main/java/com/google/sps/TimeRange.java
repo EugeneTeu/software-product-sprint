@@ -53,11 +53,7 @@ public final class TimeRange {
     this.start = start;
     this.duration = duration;
   }
-  /** Create a new Time Range */
-  public static TimeRange createNewTimeRange(int start, int duration) {
-    return new TimeRange(start, duration);
-  }
-
+  
   /**
    * Returns the start of the range in minutes.
    */

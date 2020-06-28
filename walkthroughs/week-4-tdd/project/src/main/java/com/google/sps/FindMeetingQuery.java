@@ -24,7 +24,7 @@ import java.lang.Math;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    // Thoughts:
+    // My Approach: 
     // for each attendee, 
     //    find the meeting they currently have 
     // rank the attendee by the number of meetings they have, in descending order
@@ -61,15 +61,14 @@ public final class FindMeetingQuery {
 
     // we now know where are the free slots in a day
     Collection<TimeRange> possibleFreeSlots = getFreeSlots(mergedEventList, durationOfMeeting);
-
-
-
+    
     return possibleFreeSlots;
   }
 
   // Filters the attendees events required for this meeting request e.g events that will cause a meeting to fail
   public static Collection<Event> getAttendeesEvent(Collection<String> attendees, Collection<Event> events) {
     // stream implementation
+    // Had trouble using streams so changed to simple for loop iteration
     /*
     Stream<Event> streamEvents = events.stream();
     Stream<String> streamAttendees = attendees.stream();
@@ -106,17 +105,15 @@ public final class FindMeetingQuery {
     for (Event event: events) {
       TimeRange timeRange = event.getWhen();
       listTimeRange.add(timeRange);
-      //System.out.println(timeRange);
     }
-
-    //System.out.println("*****************\n\n\n");
 
     // order the time ranges by starting
     Collections.sort(listTimeRange, TimeRange.ORDER_BY_START);
     List<TimeRange> mergedListTimeRange = new ArrayList();
 
-    // we take first interval as current
-    // [[1,4],[2,6]]
+    // we take first range as current
+    // e.g [[1,4],[2,6]]
+    // put [1,4] inside result list first
     TimeRange currentTimeRange = listTimeRange.get(0);
     mergedListTimeRange.add(currentTimeRange);
     if (listTimeRange.size() == 1) {
@@ -127,22 +124,20 @@ public final class FindMeetingQuery {
       TimeRange nextTimeRange = listTimeRange.get(i);
       if (currentTimeRange.end() >= nextTimeRange.start()) {
         int biggerEndTime = Math.max(currentTimeRange.end(), nextTimeRange.end());
-        //int newDuration = biggerEndTime - currentTimeRange.start();
+      
         // we increment the current range e.g [1,4],[2,6] => [1,6]
         // this might not be the optimum interval e.g ... [2,6], [5,7] ...
         // we need to continue checking with this currentTimeRange
         currentTimeRange = TimeRange.fromStartEnd(currentTimeRange.start(), biggerEndTime, false);
-        //TimeRange.createNewTimeRange(currentTimeRange.start(), newDuration);
+        // if we need to change the time range inside the result list
         mergedListTimeRange.remove(mergedListTimeRange.size() - 1);
         mergedListTimeRange.add(currentTimeRange);
       } else {
-        // if the next one does not overlap with current, we keep this timeRange
+        // if the next one does not overlap with current, we can take the next one 
         currentTimeRange = listTimeRange.get(i);
         mergedListTimeRange.add(currentTimeRange);
       }
     }
-
-    System.out.println("length: " + mergedListTimeRange.size());
 
     return mergedListTimeRange;
   }
@@ -150,8 +145,6 @@ public final class FindMeetingQuery {
   public static Collection<TimeRange> getFreeSlots(Collection<TimeRange> mergedEventList, long durationOfMeeting) {
     List<TimeRange> freeSlotsList = new ArrayList();
     List<TimeRange> timeRangeList = new ArrayList(mergedEventList);
-  
-
 
     int currentStart = TimeRange.START_OF_DAY;
     // for free slots up to the last time range
@@ -159,26 +152,19 @@ public final class FindMeetingQuery {
       TimeRange range = timeRangeList.get(i);
       // first interval
       // e.g both start time is same
-      if (currentStart  >= range.start()) {
-        currentStart = range.end();
-      } else {
+      if (currentStart < range.start()) {
         // check that the spacing can fit the meeting requested
         if ((range.start() - currentStart) >= durationOfMeeting) {
           freeSlotsList.add(TimeRange.fromStartEnd(currentStart, range.start(), false ));
-         
         }
-         currentStart = range.end();
       }
+      currentStart = range.end();
     }
-
     // after last free slot 
     TimeRange lastTimeRange = timeRangeList.get(timeRangeList.size() - 1);
     if ( (TimeRange.END_OF_DAY - lastTimeRange.end()) >= durationOfMeeting ) {
       freeSlotsList.add(TimeRange.fromStartEnd(lastTimeRange.end(), TimeRange.END_OF_DAY, true));
     }
-  
-
-
     return freeSlotsList;
   }
 }

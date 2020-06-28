@@ -50,12 +50,7 @@ public final class FindMeetingQueryTest {
   private static final int DURATION_2_HOUR = 120;
 
   private FindMeetingQuery query;
-  @Test
-  public void test() {
-    Assert.assertEquals(true,true);
-  }
-
-  
+ 
   @Before
   public void setUp() {
     query = new FindMeetingQuery();
