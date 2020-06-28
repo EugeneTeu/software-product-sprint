@@ -65,7 +65,9 @@ public final class FindMeetingQuery {
     return possibleFreeSlots;
   }
 
-  // Filters the attendees events required for this meeting request e.g events that will cause a meeting to fail
+  /** 
+   * Filters the attendees events required for this meeting request e.g events that will cause a meeting to fail 
+   */
   public static Collection<Event> getAttendeesEvent(Collection<String> attendees, Collection<Event> events) {
     // stream implementation
     // Had trouble using streams so changed to simple for loop iteration
@@ -99,6 +101,7 @@ public final class FindMeetingQuery {
     return eventsList;
   }
 
+  /** Merges the timeranges from the events */
   public static Collection<TimeRange> mergeTimeRanges(Collection<Event> events) {
     List<TimeRange> listTimeRange = new ArrayList();
 
@@ -142,6 +145,9 @@ public final class FindMeetingQuery {
     return mergedListTimeRange;
   }
 
+  /**
+   * Gets a list of possible time ranges from the merged events 
+   */
   public static Collection<TimeRange> getFreeSlots(Collection<TimeRange> mergedEventList, long durationOfMeeting) {
     List<TimeRange> freeSlotsList = new ArrayList();
     List<TimeRange> timeRangeList = new ArrayList(mergedEventList);
