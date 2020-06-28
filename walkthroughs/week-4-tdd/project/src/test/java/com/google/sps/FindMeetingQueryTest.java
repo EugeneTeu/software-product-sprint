@@ -55,7 +55,6 @@ public final class FindMeetingQueryTest {
   public void setUp() {
     query = new FindMeetingQuery();
   }
-  
 
   @Test
   public void optionsForNoAttendees() {
@@ -66,8 +65,6 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
-  
 
   @Test
   public void noOptionsForTooLongOfARequest() {
@@ -226,7 +223,6 @@ public final class FindMeetingQueryTest {
     Assert.assertEquals(expected, actual);
   }
   
-
   @Test
   public void ignoresPeopleNotAttending() {
     // Add an event, but make the only attendee someone different from the person looking to book
