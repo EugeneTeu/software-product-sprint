@@ -53,7 +53,7 @@ public final class TimeRange {
     this.start = start;
     this.duration = duration;
   }
-
+  
   /**
    * Returns the start of the range in minutes.
    */

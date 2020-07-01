@@ -50,7 +50,7 @@ public final class FindMeetingQueryTest {
   private static final int DURATION_2_HOUR = 120;
 
   private FindMeetingQuery query;
-
+ 
   @Before
   public void setUp() {
     query = new FindMeetingQuery();
@@ -77,7 +77,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void eventSplitsRestriction() {
     // The event should split the day into two options (before and after the event).
@@ -93,7 +93,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void everyAttendeeIsConsidered() {
     // Have each person have different events. We should see two options because each person has
@@ -222,7 +222,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void ignoresPeopleNotAttending() {
     // Add an event, but make the only attendee someone different from the person looking to book
@@ -247,7 +247,7 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
-
+  
   @Test
   public void notEnoughRoom() {
     // Have one person, but make it so that there is not enough room at any point in the day to
